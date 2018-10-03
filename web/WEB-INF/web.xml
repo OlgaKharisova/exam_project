@@ -14,7 +14,7 @@
 
     <servlet>
         <servlet-name>create-manager</servlet-name>
-        <servlet-class>ru.innopolis.controller.CreateManagerServlet</servlet-class>
+        <servlet-class>ru.innopolis.controller.manager.CreateManagerServlet</servlet-class>
     </servlet>
 
     <servlet>

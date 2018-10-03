@@ -1,7 +1,7 @@
-package ru.innopolis.controller;
+package ru.innopolis.controller.manager;
 
 import ru.innopolis.model.Manager;
-import ru.innopolis.service.ManagerServise;
+import ru.innopolis.service.ManagerService;
 import ru.innopolis.service.ManagerServiseImpl;
 
 import javax.servlet.ServletException;
@@ -12,10 +12,10 @@ import java.io.IOException;
 
 public class CreateManagerServlet extends HttpServlet {
 
-    private ManagerServise managerServise;
+    private ManagerService managerService;
 
     public CreateManagerServlet() {
-        managerServise = new ManagerServiseImpl();
+        managerService = new ManagerServiseImpl();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CreateManagerServlet extends HttpServlet {
         String patronymic = req.getParameter("patronymic");
         String email = req.getParameter("email");
         Manager manager = new Manager(name, secondName, patronymic, email);
-        managerServise.saveManager(manager);
+        managerService.saveManager(manager);
         resp.sendRedirect("/");
     }
 }

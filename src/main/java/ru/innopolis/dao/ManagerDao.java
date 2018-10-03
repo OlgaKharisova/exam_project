@@ -5,12 +5,11 @@ import org.apache.log4j.Logger;
 import ru.innopolis.dao.connection.ConnectionManager;
 import ru.innopolis.model.Manager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ManagerDao implements CRUD<Manager> {
+public class ManagerDao implements CRUD<Manager>, DAO<Manager> {
     private static ConnectionManager connectionManager = ConnectionManager.getInstance();
     private final Logger logger = LogManager.getLogger(ManagerDao.class);
 
@@ -85,8 +84,7 @@ public class ManagerDao implements CRUD<Manager> {
     public boolean delete(long id) {
         String query = "DELETE FROM managers WHERE id=?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query))
-        {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -94,5 +92,28 @@ public class ManagerDao implements CRUD<Manager> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Manager> getAll() {
+        String query = "SELECT*FROM managers";
+        List<Manager> managers = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             Statement prepareStatement = connection.createStatement();
+             ResultSet resultSet = prepareStatement.executeQuery(query))
+        {
+            while (resultSet.next()) {
+                Manager manager = new Manager();
+                manager.setId(resultSet.getLong(1));
+                manager.setName(resultSet.getString(2));
+                manager.setSecondName(resultSet.getString(3));
+                manager.setPatronymic(resultSet.getString(4));
+                manager.setEmail(resultSet.getString(5));
+                managers.add(manager);
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return managers;
     }
 }
