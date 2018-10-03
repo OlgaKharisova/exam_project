@@ -2,11 +2,14 @@ package ru.innopolis.dao;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import ru.innopolis.dao.connection.ConnectionManager;
 import ru.innopolis.model.Client;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ClientDao implements CRUD<Client> {
+public class ClientDao implements CRUD<Client>, DAO<Client> {
 
     private static ConnectionManager connectionManager = ConnectionManager.getInstance();
     private final Logger logger = LogManager.getLogger(ClientDao.class);
@@ -15,14 +18,13 @@ public class ClientDao implements CRUD<Client> {
     public boolean save(Client client) {
         String query = "INSERT INTO clients values (DEFAULT, ?, ?, ?, ?) RETURNING id";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query))
-        {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, client.getName());
             preparedStatement.setString(2, client.getSecondName());
             preparedStatement.setString(3, client.getPatronymic());
             preparedStatement.setString(4, client.getEmail());
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 client.setId(resultSet.getLong(1));
             }
             resultSet.close();
@@ -82,8 +84,7 @@ public class ClientDao implements CRUD<Client> {
     public boolean delete(long id) {
         String query = "DELETE FROM clients WHERE id=?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query))
-        {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -91,5 +92,28 @@ public class ClientDao implements CRUD<Client> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Client> getAll() {
+        String query = "SELECT * FROM clients";
+        List<Client> clients = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             Statement preparedStatement = connection.createStatement();
+             ResultSet resultSet = preparedStatement.executeQuery(query))
+        {
+            while (resultSet.next()) {
+                Client client = new Client();
+                client.setId(resultSet.getLong(1));
+                client.setName(resultSet.getString(2));
+                client.setSecondName(resultSet.getString(3));
+                client.setPatronymic(resultSet.getString(4));
+                client.setEmail(resultSet.getString(5));
+                clients.add(client);
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return clients;
     }
 }

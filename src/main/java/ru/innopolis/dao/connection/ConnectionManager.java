@@ -1,4 +1,4 @@
-package ru.innopolis.dao;
+package ru.innopolis.dao.connection;
 
 
 import java.sql.Connection;

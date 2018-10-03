@@ -1,5 +1,8 @@
 package ru.innopolis.dao;
 
+/**
+ * CRUD - create read update delete
+ */
 public interface CRUD<T> {
 
     boolean save(T t);

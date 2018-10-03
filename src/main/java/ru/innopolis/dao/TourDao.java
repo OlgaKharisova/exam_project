@@ -2,6 +2,7 @@ package ru.innopolis.dao;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import ru.innopolis.dao.connection.ConnectionManager;
 import ru.innopolis.model.Manager;
 import ru.innopolis.model.Tour;
 import ru.innopolis.model.TourStatus;
