@@ -19,8 +19,8 @@ public class BookingDao implements CRUD<Booking> {
              PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
             preparedStatement.setTimestamp(1, new Timestamp(booking.getTimestamp()));
-            preparedStatement.setLong(2, booking.getClient().getId());
-            preparedStatement.setLong(3, booking.getTour().getId());
+            preparedStatement.setLong(2, booking.getClientId());
+            preparedStatement.setLong(3, booking.getTourId());
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
                 booking.setId(resultSet.getLong(1));
@@ -46,14 +46,8 @@ public class BookingDao implements CRUD<Booking> {
                 booking = new Booking();
                 booking.setId(resultSet.getLong(1));
                 booking.setTimestamp(resultSet.getTimestamp(2).getTime());
-                long clientID = resultSet.getLong(3);
-                ClientDao clientDao = new ClientDao();
-                Client client = clientDao.get(clientID);
-                booking.setClient(client);
-                long tourID = resultSet.getLong(4);
-                TourDao tourDao = new TourDao();
-                Tour tour = tourDao.get(tourID);
-                booking.setTour(tour);
+                booking.setClientId(resultSet.getLong(3));
+                booking.setTourId(resultSet.getLong(4));
             }
             resultSet.close();
         } catch (SQLException e) {
@@ -71,8 +65,8 @@ public class BookingDao implements CRUD<Booking> {
              PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
             preparedStatement.setTimestamp(1, new Timestamp(booking.getTimestamp()));
-            preparedStatement.setLong(2, booking.getClient().getId());
-            preparedStatement.setLong(3, booking.getTour().getId());
+            preparedStatement.setLong(2, booking.getClientId());
+            preparedStatement.setLong(3, booking.getTourId());
             preparedStatement.setLong(4, booking.getId());
             preparedStatement.execute();
             return true;

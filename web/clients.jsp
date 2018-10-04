@@ -15,8 +15,8 @@
 <H1>Список клиентов:</H1>
 <%
     List<Client> list = (List<Client>) request.getAttribute("clients");
-    for (Client client : list) {%>
-<a href="/clients?id=<%=client.getId()%>"><%=client.getName()%>
+    for (Client clientId : list) {%>
+<a href="/clients?id=<%=clientId.getId()%>"><%=clientId.getName()%>
 </a><BR>
 <%
     }

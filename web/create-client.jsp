@@ -11,7 +11,7 @@
     <title>Создание клиента</title>
 </head>
 <body>
-<form id = "create-client" method="post" action="/create-client">
+<form id = "create-clientId" method="post" action="/create-clientId">
     <input type="text" id = "name" name = "name">Имя</input><br>
     <input type="text" name = "secondName">Фамилия</input><br>
     <input type="text" name = "patronymic">Отчество</input><br>

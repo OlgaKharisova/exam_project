@@ -1,4 +1,4 @@
 package ru.innopolis.controller.tour;
 
-public class GetAllToitServlet {
+public class GetAllTourServlet {
 }

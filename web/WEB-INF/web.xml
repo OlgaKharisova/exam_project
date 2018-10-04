@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>tour-in-Japan</display-name>
+    <display-name>tourId-in-Japan</display-name>
 
     <!--Сервлеты-->
     <servlet>
@@ -22,6 +22,13 @@
         <servlet-class>ru.innopolis.controller.client.GetAllClientServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>create-booking</servlet-name>
+        <servlet-class>ru.innopolis.controller.booking.CreateBookingServlet</servlet-class>
+    </servlet>
+
+
+
     <!--Маппинги-->
     <servlet-mapping>
         <servlet-name>create-client</servlet-name>
@@ -36,6 +43,11 @@
     <servlet-mapping>
         <servlet-name>clients</servlet-name>
         <url-pattern>/clients</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>create-booking</servlet-name>
+        <url-pattern>/create-booking</url-pattern>
     </servlet-mapping>
 
 </web-app>

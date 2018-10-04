@@ -3,11 +3,11 @@ package ru.innopolis.service;
 import ru.innopolis.dao.ManagerDao;
 import ru.innopolis.model.Manager;
 
-public class ManagerServiseImpl implements ManagerService {
+public class ManagerServiceImpl implements ManagerService {
 
-    ManagerDao managerDao;
+    private ManagerDao managerDao;
 
-    public ManagerServiseImpl() {
+    public ManagerServiceImpl() {
         managerDao = new ManagerDao();
     }
 

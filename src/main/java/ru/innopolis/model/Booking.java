@@ -5,17 +5,17 @@ import java.util.Objects;
 public class Booking {
 
     private long timestamp; //время старта брони (в секундах)
-    private Client client;  //клиент, создавший броню
-    private Tour tour;      //тур, который забронировали
+    private long clientId;  //клиент, создавший броню
+    private long tourId;      //тур, который забронировали
     private Long id;        //идентификатор брони
 
     public Booking() {
     }
 
-    public Booking(long timestamp, Client client, Tour tour) {
+    public Booking(long timestamp, long clientId, long tourId) {
         this.timestamp = timestamp;
-        this.client = client;
-        this.tour = tour;
+        this.clientId = clientId;
+        this.tourId = tourId;
     }
 
     public long getTimestamp() {
@@ -26,20 +26,20 @@ public class Booking {
         this.timestamp = timestamp;
     }
 
-    public Client getClient() {
-        return client;
+    public long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
     }
 
-    public Tour getTour() {
-        return tour;
+    public long getTourId() {
+        return tourId;
     }
 
-    public void setTour(Tour tour) {
-        this.tour = tour;
+    public void setTourId(long tourId) {
+        this.tourId = tourId;
     }
 
     public Long getId() {
@@ -56,23 +56,20 @@ public class Booking {
         if (!(o instanceof Booking)) return false;
         Booking booking = (Booking) o;
         return timestamp == booking.timestamp &&
-                Objects.equals(client, booking.client) &&
-                Objects.equals(tour, booking.tour) &&
+                Objects.equals(clientId, booking.clientId) &&
+                Objects.equals(tourId, booking.tourId) &&
                 Objects.equals(id, booking.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(timestamp, client, tour, id);
+        return Objects.hash(timestamp, clientId, tourId, id);
     }
 
     @Override
     public String toString() {
-        return "Booking{" +
-                "timestamp=" + timestamp +
-                ", client=" + client +
-                ", tour=" + tour +
-                ", id=" + id +
-                '}';
+        return "Booking{" + "timestamp=" + timestamp +
+                ", clientId=" + clientId + ", tourId=" + tourId
+                + ", id=" + id + '}';
     }
 }

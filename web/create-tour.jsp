@@ -10,20 +10,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Tour tour</title>
+    <title>Tour tourId</title>
 </head>
 <body>
 <H1>Список туров:</H1>
 <%
     List<Tour> list = (List<Tour>) request.getAttribute("tours");
-    for (Tour tour : list) {%>
-<a href="/tours?id=<%=tour.getId()%>">
+    for (Tour tourId : list) {%>
+<a href="/tours?id=<%=tourId.getId()%>">
     <table> Туры </table>
     <th>id</th>
-    <td>tour.getId()</td>
+    <td>tourId.getId()</td>
 
     <th>creator</th>
-    <td><%=tour.getCreator()%></td>
+    <td><%=tourId.getCreator()%></td>
 
     <%--дописать--%>
 

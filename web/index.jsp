@@ -11,6 +11,6 @@
     <title>Сервлеты</title>
   </head>
   <body>
-  Просто строка =) /client
+  Просто строка =) /clientId
   </body>
 </html>
