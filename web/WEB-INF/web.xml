@@ -27,7 +27,10 @@
         <servlet-class>ru.innopolis.controller.booking.CreateBookingServlet</servlet-class>
     </servlet>
 
-
+    <servlet>
+        <servlet-name>main-page</servlet-name>
+        <servlet-class>ru.innopolis.controller.MainPageServlet</servlet-class>
+    </servlet>
 
     <!--Маппинги-->
     <servlet-mapping>
@@ -50,4 +53,18 @@
         <url-pattern>/create-booking</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>main-page</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/images/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/jsp/*</url-pattern>
+    </servlet-mapping>
 </web-app>
