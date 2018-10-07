@@ -1,19 +1,20 @@
 package ru.innopolis.model;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class Tour {
 
     private Long id;                //идентификатор тура
     private double tourPrice;       //цена всего тура
     private double flightPrice;     //цена авиаперелета
+    private Date startDate;         //дата начала тура
     private Date endDate;           //дата окончания тура
-    private int participantsCount;  //количество участников в туре
+    private int maxParticipants;  //количество участников в туре
     private TourStatus tourStatus;  //статус тура
     private Manager creator;        //менеджер, создавший тур
-    private Date startDate;         //дата начала тура
+    private String description;     //описание тура
 //    private List<Client> clients;   //клиенты, которые внесли оплату
 //    private List<Booking> bookings; //брони тура
 //    private List<String> cities;    //список городов, через которые проходит тур
@@ -21,16 +22,16 @@ public class Tour {
     public Tour() {
     }
 
-    public Tour(double tourPrice, double flightPrice, Date endDate,
-                int participantsCount, TourStatus tourStatus, Manager creator,
-                Date startDate) {
+    public Tour(double tourPrice, double flightPrice, Date startDate, Date endDate, int maxParticipants, TourStatus tourStatus,
+                Manager creator, String description) {
         this.tourPrice = tourPrice;
         this.flightPrice = flightPrice;
+        this.startDate = startDate;
         this.endDate = endDate;
-        this.participantsCount = participantsCount;
+        this.maxParticipants = maxParticipants;
         this.tourStatus = tourStatus;
         this.creator = creator;
-        this.startDate = startDate;
+        this.description = description;
     }
 
     public Long getId() {
@@ -65,12 +66,12 @@ public class Tour {
         this.endDate = endDate;
     }
 
-    public int getParticipantsCount() {
-        return participantsCount;
+    public int getMaxParticipants() {
+        return maxParticipants;
     }
 
-    public void setParticipantsCount(int participantsCount) {
-        this.participantsCount = participantsCount;
+    public void setMaxParticipants(int maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 
     public TourStatus getTourStatus() {
@@ -97,6 +98,14 @@ public class Tour {
         this.startDate = startDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,7 +113,7 @@ public class Tour {
         Tour tour = (Tour) o;
         return Double.compare(tour.tourPrice, tourPrice) == 0 &&
                 Double.compare(tour.flightPrice, flightPrice) == 0 &&
-                participantsCount == tour.participantsCount &&
+                maxParticipants == tour.maxParticipants &&
                 Objects.equals(id, tour.id) &&
                 Objects.equals(endDate, tour.endDate) &&
                 tourStatus == tour.tourStatus &&
@@ -114,7 +123,7 @@ public class Tour {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tourPrice, flightPrice, endDate, participantsCount, tourStatus, creator, startDate);
+        return Objects.hash(id, tourPrice, flightPrice, endDate, maxParticipants, tourStatus, creator, startDate);
     }
 
     @Override
@@ -124,10 +133,16 @@ public class Tour {
                 ", tourPrice=" + tourPrice +
                 ", flightPrice=" + flightPrice +
                 ", endDate=" + endDate +
-                ", participantsCount=" + participantsCount +
+                ", maxParticipants=" + maxParticipants +
                 ", tourStatus=" + tourStatus +
                 ", creator=" + creator +
                 ", startDate=" + startDate +
                 '}';
+    }
+
+    public long getDuration() {
+        //разница в миллисекундах
+        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+        return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

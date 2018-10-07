@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerDao implements CRUD<Manager>, DAO<Manager> {
+public class ManagerDao implements DAO<Manager> {
     private static ConnectionManager connectionManager = ConnectionManager.getInstance();
     private final Logger logger = LogManager.getLogger(ManagerDao.class);
 

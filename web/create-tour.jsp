@@ -1,35 +1,19 @@
-<%@ page import="ru.innopolis.model.Client" %>
-<%@ page import="java.util.List" %>
-<%@ page import="ru.innopolis.model.Tour" %><%--
-  Created by IntelliJ IDEA.
-  User: sa
-  Date: 02.10.18
-  Time: 21:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Tour tourId</title>
+    <title>Создание тура</title>
 </head>
 <body>
-<H1>Список туров:</H1>
-<%
-    List<Tour> list = (List<Tour>) request.getAttribute("tours");
-    for (Tour tourId : list) {%>
-<a href="/tours?id=<%=tourId.getId()%>">
-    <table> Туры </table>
-    <th>id</th>
-    <td>tourId.getId()</td>
-
-    <th>creator</th>
-    <td><%=tourId.getCreator()%></td>
-
-    <%--дописать--%>
-
-</a><BR>
-<%
-    }
-%>
+<form id = "create-manager" method="post" action="/create-tour">
+    <input type="text" name = "tourPrice">цена всего тура</input><br>
+    <input type="text" name = "flightPrice">цена авиаперелета</input><br>
+    <input type="date" name = "startDate">дата начала тура</input><br>
+    <input type="date" name = "endDate">дата окончания тура</input><br>
+    <input type="text" name = "maxParticipants">количество участников в туре</input><br>
+    <input type="text" name = "tourStatus">статус тура</input><br>
+    <input type="text" name = "creator">менеджер, создавший тур</input><br>
+    <input type="text" name = "description">описание</input><br>
+    <input type="submit" name = "Создать тур" />
+</form>
 </body>
 </html>

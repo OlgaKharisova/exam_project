@@ -9,4 +9,6 @@ public interface ManagerService {
     boolean saveManager(Manager manager);
 
     List<Manager> getAll();
+
+    Manager get(long id);
 }

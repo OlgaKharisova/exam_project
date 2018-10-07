@@ -22,4 +22,9 @@ public class ManagerServiceImpl implements ManagerService {
     public List<Manager> getAll() {
         return managerDao.getAll();
     }
+
+    @Override
+    public Manager get(long id) {
+        return managerDao.get(id);
+    }
 }

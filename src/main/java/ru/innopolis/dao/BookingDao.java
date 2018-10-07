@@ -6,8 +6,9 @@ import ru.innopolis.dao.connection.ConnectionManager;
 import ru.innopolis.model.*;
 
 import java.sql.*;
+import java.util.List;
 
-public class BookingDao implements CRUD<Booking> {
+public class BookingDao implements DAO<Booking> {
 
     private static ConnectionManager connectionManager = ConnectionManager.getInstance();
     private final Logger logger = LogManager.getLogger(BookingDao.class);
@@ -89,5 +90,10 @@ public class BookingDao implements CRUD<Booking> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Booking> getAll() {
+        return null;
     }
 }
