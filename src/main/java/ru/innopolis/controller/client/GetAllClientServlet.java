@@ -1,8 +1,7 @@
 package ru.innopolis.controller.client;
 
-import ru.innopolis.model.Client;
+import ru.innopolis.entity.user.Client;
 import ru.innopolis.service.ClientService;
-import ru.innopolis.service.ClientServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,7 @@ public class GetAllClientServlet extends HttpServlet {
     private ClientService clientService;
 
     public GetAllClientServlet() {
-        clientService = new ClientServiceImpl();
+        clientService = new ClientService();
     }
 
     @Override

@@ -1,12 +1,10 @@
 package ru.innopolis.controller.tour;
 
-import ru.innopolis.model.Manager;
-import ru.innopolis.model.Tour;
-import ru.innopolis.model.TourStatus;
+import ru.innopolis.entity.Tour;
+import ru.innopolis.entity.user.Manager;
+import ru.innopolis.enums.TourStatus;
 import ru.innopolis.service.ManagerService;
-import ru.innopolis.service.ManagerServiceImpl;
 import ru.innopolis.service.TourService;
-import ru.innopolis.service.TourServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +19,8 @@ public class CreateTourServlet extends HttpServlet {
     private ManagerService managerService;
 
     public CreateTourServlet() {
-        tourService = new TourServiceImpl();
-        managerService = new ManagerServiceImpl();
+        tourService = new TourService();
+        managerService = new ManagerService();
     }
 
     @Override
@@ -40,10 +38,10 @@ public class CreateTourServlet extends HttpServlet {
         tour.setEndDate(Date.valueOf(req.getParameter("endDate")));
         tour.setMaxParticipants(Integer.valueOf(req.getParameter("maxParticipants")));
         Manager manager = managerService.get(Integer.valueOf(req.getParameter("creator")));
-        tour.setCreator(manager);
+        tour.setManager(manager);
         tour.setTourStatus(TourStatus.valueOf(req.getParameter("tourStatus")));
         tour.setDescription(req.getParameter("description"));
-        tourService.saveTour(tour);
+        tourService.save(tour);
         resp.sendRedirect("/");
     }
 }

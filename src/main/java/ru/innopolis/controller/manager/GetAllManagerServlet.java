@@ -1,8 +1,7 @@
 package ru.innopolis.controller.manager;
 
-import ru.innopolis.model.Manager;
+import ru.innopolis.entity.user.Manager;
 import ru.innopolis.service.ManagerService;
-import ru.innopolis.service.ManagerServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ public class GetAllManagerServlet extends HttpServlet {
     private ManagerService managerService;
 
     public GetAllManagerServlet() {
-        managerService = new ManagerServiceImpl();
+        managerService = new ManagerService();
     }
 
     @Override

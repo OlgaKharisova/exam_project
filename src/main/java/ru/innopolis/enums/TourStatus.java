@@ -1,4 +1,4 @@
-package ru.innopolis.model;
+package ru.innopolis.enums;
 
 public enum TourStatus {
 

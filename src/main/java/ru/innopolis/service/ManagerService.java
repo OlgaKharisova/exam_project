@@ -1,14 +1,28 @@
 package ru.innopolis.service;
 
-import ru.innopolis.model.Manager;
+import ru.innopolis.dao.ManagerDao;
+import ru.innopolis.entity.user.Manager;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface ManagerService {
+public class ManagerService {
 
-    boolean saveManager(Manager manager);
+    private ManagerDao managerDao;
 
-    List<Manager> getAll();
+    public ManagerService() {
+        managerDao = new ManagerDao();
+    }
 
-    Manager get(long id);
+    public Serializable saveManager(Manager manager) {
+        return managerDao.save(manager);
+    }
+
+    public List<Manager> getAll() {
+        return managerDao.getAll();
+    }
+
+    public Manager get(long id) {
+        return managerDao.get(id);
+    }
 }

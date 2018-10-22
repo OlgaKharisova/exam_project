@@ -1,8 +1,7 @@
 package ru.innopolis.controller;
 
-import ru.innopolis.model.Tour;
+import ru.innopolis.entity.Tour;
 import ru.innopolis.service.TourService;
-import ru.innopolis.service.TourServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,7 @@ public class MainPageServlet extends HttpServlet {
     private TourService tourService;
 
     public MainPageServlet() {
-        this.tourService = new TourServiceImpl();
+        this.tourService = new TourService();
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Deprecated
 public class ConnectionManager {
 
     private static ConnectionManager connectionManager;
@@ -25,8 +26,8 @@ public class ConnectionManager {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/sa",
-                    "sa",
-                    "sa");
+                    "pd",
+                    "pd");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {

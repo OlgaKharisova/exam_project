@@ -1,12 +1,24 @@
 package ru.innopolis.service;
 
-import ru.innopolis.model.Tour;
+import ru.innopolis.dao.TourDao;
+import ru.innopolis.entity.Tour;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface TourService {
+public class TourService {
 
-    boolean saveTour(Tour tour);
+    private TourDao tourDao;
 
-    List<Tour> getAll();
+    public TourService() {
+        tourDao = new TourDao();
+    }
+
+    public Serializable save(Tour tour) {
+        return tourDao.save(tour);
+    }
+
+    public List<Tour> getAll() {
+        return tourDao.getAll();
+    }
 }

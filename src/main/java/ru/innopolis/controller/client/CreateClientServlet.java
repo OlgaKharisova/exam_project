@@ -1,8 +1,8 @@
 package ru.innopolis.controller.client;
 
-import ru.innopolis.model.Client;
+import ru.innopolis.entity.user.Client;
+import ru.innopolis.entity.user.UserInfo;
 import ru.innopolis.service.ClientService;
-import ru.innopolis.service.ClientServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ public class CreateClientServlet extends HttpServlet {
     private ClientService clientService;
 
     public CreateClientServlet() {
-        clientService = new ClientServiceImpl();
+        clientService = new ClientService();
     }
 
     @Override
@@ -24,13 +24,14 @@ public class CreateClientServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         String secondName = req.getParameter("secondName");
         String patronymic = req.getParameter("patronymic");
         String email = req.getParameter("email");
-        Client client = new Client(name, secondName, patronymic, email);
+        UserInfo userInfo = new UserInfo(name, secondName, patronymic);
+        Client client = new Client(userInfo);
         clientService.saveClient(client);
         resp.sendRedirect("/");
     }
